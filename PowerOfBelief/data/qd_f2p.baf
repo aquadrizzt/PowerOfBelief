@@ -1,0 +1,9 @@
+IF 
+	!Class(Protagonist,FIGHTER)
+THEN
+	RESPONSE #100
+		SetNamelessClass(FIGHTER)
+		// ChangeStat(Protagonist,XP,0,SET)
+		Continue() 
+END 
+

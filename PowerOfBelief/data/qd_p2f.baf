@@ -1,0 +1,9 @@
+IF 
+	!Class(Protagonist,CLERIC)
+THEN
+	RESPONSE #100
+		SetNamelessClass(CLERIC)
+		// ChangeStat(Protagonist,XP,0,SET)
+		Continue() 
+END 
+
