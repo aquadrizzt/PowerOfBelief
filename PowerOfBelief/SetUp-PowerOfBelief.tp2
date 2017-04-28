@@ -404,7 +404,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
 	THEN
 		RESPONSE #100
-			SetGlobal("Specialist","GLOBAL",0)
+			SetGlobal("Specialist","GLOBAL",1)
 			ChangeStat(Protagonist,STR,-1,ADD)
 			ChangeStat(Protagonist,CON,-1,ADD)
 			ChangeStat(Protagonist,MAXHITPOINTS,-3,ADD)
@@ -417,7 +417,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
 	THEN
 		RESPONSE #100
-			SetGlobal("Specialist","GLOBAL",0)
+			SetGlobal("Specialist","GLOBAL",2)
 			ChangeStat(Protagonist,DEX,-2,ADD)
 			ChangeStat(Protagonist,LUCK,-1,ADD)
 			Continue()
@@ -429,7 +429,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
 	THEN
 		RESPONSE #100
-			SetGlobal("Specialist","GLOBAL",0)
+			SetGlobal("Specialist","GLOBAL",3)
 			ChangeStat(Protagonist,INT,-2,ADD)
 			ChangeStat(Protagonist,WIS,-1,ADD)
 			ChangeStat(Protagonist,LORE,-5,ADD)
