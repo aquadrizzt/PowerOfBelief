@@ -3,7 +3,7 @@ APPEND DMFTREE
 
 IF ~~ THEN BEGIN qd_pob_priest
 	SAY @2
-	++ @3 DO ~SetGlobal("QD_Priest_Training","GLOBAL",1) CreateCreature("qd_f2p")~ EXIT 
+	++ @3 DO ~SetGlobal("QD_Priest_Training","GLOBAL",1) CreateCreature("qd_f2p",[0.0],S)~ EXIT 
 END 
 
 /*
@@ -24,7 +24,7 @@ APPEND DGRACE
 
 IF ~~ THEN BEGIN qd_pob_grace_priest
 	SAY @5 
-	++ @6 DO ~CreateCreature("qd_f2p")~ EXIT 
+	++ @6 DO ~CreateCreature("qd_f2p",[0.0],S)~ EXIT 
 END 
 
 END 
@@ -33,5 +33,5 @@ EXTEND_BOTTOM DGRACE 139 #5
 	+ ~Global("QD_Priest_Training","GLOBAL",1) !Class(Protagonist,CLERIC)~ + @7 + qd_pob_grace_priest  
 END 
 
-
-R_A_T_P_R ~.*~ ~SetNamelessClass(FIGHTER)~ ~CreateCreature("qd_p2f",[0.0],S)~
+//updating fighter trainings to also handle priest conversion
+R_A_T_P_R ~.*~ ~SetNamelessClass(FIGHTER)~ ~CreateCreature("qd_p2f",[0.0],1)~
