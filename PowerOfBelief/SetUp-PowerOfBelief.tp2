@@ -300,6 +300,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 	
 //sadness to add triggers for priest tattoo availability and specialization bonuses
 <<<<<<<< QD/tno_priest_spec_checks.baf
+	//priest first spec
 	IF
 		Global("Specialist","GLOBAL",0)
 		Global("QD_PRIEST_SPEC_7","GLOBAL",0)
@@ -314,6 +315,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 			Continue()
 	END
 	
+	//other -> priest dual spec
 	IF
 		GlobalGT("Specialist","GLOBAL",0)
 		GlobalLT("Specialist","GLOBAL",4)
@@ -329,6 +331,7 @@ COPY_EXISTING ~fell.sto~ ~override~
 			Continue()
 	END
 	
+	//priest double spec
 	IF
 		Global("Specialist","GLOBAL",0)
 		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
@@ -348,6 +351,90 @@ COPY_EXISTING ~fell.sto~ ~override~
 			
 			Continue()
 	END
+	
+	//priest -> other dual spec
+	IF
+		GlobalGT("Specialist","GLOBAL",0)
+		GlobalLT("Specialist","GLOBAL",4)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+		Global("QD_PRIEST_DUAL_SPEC","GLOBAL",0)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",0)
+	THEN
+		RESPONSE #100
+			SetGlobal("QD_PRIEST_DUAL_SPEC","GLOBAL",1)
+			Continue()
+	END 
+	
+	//priest 12 -> fighter 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",1)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,STR,-1,ADD)
+			Continue()
+	END 
+	
+	//priest 12 -> thief 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",2)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,DEX,-1,ADD)
+			Continue()
+	END 
+	
+	//priest 12 -> mage 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",3)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,INT,-1,ADD)
+			Continue()
+	END 
+	
+	//priest 7 -> fighter 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",4)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,STR,-1,ADD)
+			ChangeStat(Protagonist,CON,-1,ADD)
+			ChangeStat(Protagonist,MAXHITPOINTS,-3,ADD)
+			Continue()
+	END 
+	
+	//priest 7 -> thief 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",5)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,DEX,-2,ADD)
+			ChangeStat(Protagonist,LUCK,-1,ADD)
+			Continue()
+	END 
+	
+	//priest 7 -> mage 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",6)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,INT,-2,ADD)
+			ChangeStat(Protagonist,WIS,-1,ADD)
+			ChangeStat(Protagonist,LORE,-5,ADD)
+			Continue()
+	END 
 >>>>>>>>
 EXTEND_TOP ~baldur.bcs~ ~QD/tno_priest_spec_checks.baf~ 
 
