@@ -1,0 +1,141 @@
+	//priest first spec
+	IF
+		Global("Specialist","GLOBAL",0)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",0)
+		Class(Protagonist,CLERIC)
+		LevelGT(Protagonist,6)
+	THEN
+		RESPONSE #100
+			SetGlobal("QD_PRIEST_SPEC_7","GLOBAL",1)
+			DisplayStringNoNameHead(Protagonist,34865)
+			//priest first spec bonus
+			ChangeStat(Protagonist,WIS,1,ADD)
+			Continue()
+	END
+	
+	//other -> priest dual spec
+	IF
+		GlobalGT("Specialist","GLOBAL",0)
+		GlobalLT("Specialist","GLOBAL",4)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",0)
+		Class(Protagonist,CLERIC)
+		LevelGT(Protagonist,6)
+	THEN
+		RESPONSE #100
+			SetGlobal("QD_PRIEST_SPEC_7","GLOBAL",1)
+			SetGlobal("QD_PRIEST_DUAL_SPEC","GLOBAL",1)
+			DisplayStringNoNameHead(Protagonist,34865)
+			ChangeStat(Protagonist,WIS,1,ADD)
+			Continue()
+	END
+	
+	//priest double spec
+	IF
+		Global("Specialist","GLOBAL",0)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+		Global("QD_PRIEST_DUAL_SPEC","GLOBAL",0)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",0)
+		Class(Protagonist,CLERIC)
+		LevelGT(Protagonist,11)
+	THEN
+		RESPONSE #100
+			SetGlobal("QD_PRIEST_SPEC_12","GLOBAL",1)
+			DisplayStringNoNameHead(Protagonist,34865)
+			ChangeStat(Protagonist,WIS,2,ADD)
+			ChangeStat(Protagonist,CHR,1,ADD)
+			ChangeStat(Protagonist,RESISTMAGIC,10,ADD)
+			Wait(2)
+			DisplayStringNoNameHead(Protagonist,34889)
+			
+			Continue()
+	END
+	
+	//priest -> other dual spec
+	IF
+		GlobalGT("Specialist","GLOBAL",0)
+		GlobalLT("Specialist","GLOBAL",4)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+		Global("QD_PRIEST_DUAL_SPEC","GLOBAL",0)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",0)
+	THEN
+		RESPONSE #100
+			SetGlobal("QD_PRIEST_DUAL_SPEC","GLOBAL",1)
+			Continue()
+	END 
+	
+	//priest 12 -> fighter 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",1)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,STR,-1,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
+	
+	//priest 12 -> thief 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",2)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,DEX,-1,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
+	
+	//priest 12 -> mage 7 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",3)
+		Global("QD_PRIEST_SPEC_12","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",0)
+			ChangeStat(Protagonist,INT,-1,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
+	
+	//priest 7 -> fighter 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",4)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",1)
+			ChangeStat(Protagonist,STR,-1,ADD)
+			ChangeStat(Protagonist,CON,-1,ADD)
+			ChangeStat(Protagonist,MAXHITPOINTS,-3,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
+	
+	//priest 7 -> thief 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",5)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",2)
+			ChangeStat(Protagonist,DEX,-2,ADD)
+			ChangeStat(Protagonist,LUCK,-1,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
+	
+	//priest 7 -> mage 12 [cancels bonuses] 
+	IF
+		Global("Specialist","GLOBAL",6)
+		Global("QD_PRIEST_SPEC_7","GLOBAL",1)
+	THEN
+		RESPONSE #100
+			SetGlobal("Specialist","GLOBAL",3)
+			ChangeStat(Protagonist,INT,-2,ADD)
+			ChangeStat(Protagonist,WIS,-1,ADD)
+			ChangeStat(Protagonist,LORE,-5,ADD)
+			DisplayStringNoNameHead(Protagonist,@16)
+			Continue()
+	END 
