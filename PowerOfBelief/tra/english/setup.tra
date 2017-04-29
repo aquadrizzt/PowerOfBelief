@@ -5,7 +5,7 @@
 @4 = ~"I was wondering if you could show me more about the power of *belief*."~
 @5 = ~"You would like me to remind you how to shape reality with your *beliefs* once again? Very well then."~
 @6 = ~As before, your shift in perspective makes the world seem far less stable. "A pleasure as always, Grace."~
-@7 = ~"Could you remind me about the power of *belief*."~
+@7 = ~"Could you remind me about the power of *belief*?"~
 
 @10 = ~Tattoo of Belief~ 
 @11 = ~TATTOO OF BELIEF 
@@ -33,3 +33,4 @@ Usable only by the Nameless One
 This tattoo symbolizes your extensive understanding of the power of belief. Your ability to use belief to shape reality is substantially improved, heightening your awareness and force of will considerably, and doubling your spell memorization capacity for minor spells.~ 
 @14 = ~Global("QD_PRIEST_SPEC_7","GLOBAL",1)~
 @15 = ~Global("QD_PRIEST_SPEC_12","GLOBAL",1)~
+@16 = ~Specialization bonuses negated.~
