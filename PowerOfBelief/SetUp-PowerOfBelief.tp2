@@ -314,9 +314,19 @@ COPY_EXISTING ~fell.sto~ ~override~
 		END 
 	END 
 	
-ACTION_FOR_EACH itm IN ~AMACE~ ~CLUB2~ ~DDMACE~ ~NETTLES~ ~OLDARM1~ ~SCLUB~ ~REASON~ BEGIN 
+ACTION_FOR_EACH itm IN ~AMACE~ ~DDMACE~ ~OLDARM1~ ~SCLUB~ ~REASON~ BEGIN 
 
 	COPY_EXISTING ~%itm%.itm~ ~override~ 
 		READ_BYTE 0x1e priest
 		WRITE_BYTE 0x1e (priest BAND 01111111)
+		READ_STRREF 0x50 unid_desc
+		READ_STRREF 0x54 id_desc
+
+	//need to patch descriptions for priests
+	//:Usable only by Fighters: reason; amace ddmace, 
+	//oldarm1 fighter and thieves to Not usable by mages 
+	//sclub needs no desc changes 
 END 
+
+//add ClassXLevel Checks for Transcendent One 
+EXTEND_BOTTOM ~1204trig.bcs~ ~PowerOfBelief/data/qd_pob_trans.baf~ 
