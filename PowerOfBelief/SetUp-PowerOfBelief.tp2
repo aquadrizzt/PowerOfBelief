@@ -25,7 +25,7 @@ LANGUAGE ~English~ ~english~ ~PowerOfBelief/tra/english/setup.tra~
 
 BEGIN @0
 
-COMPILE ~PowerOfBelief/data/qd_pob_mft.d~
+COMPILE ~PowerOfBelief/data/qd_pob_patch.d~
 
 COPY ~PowerOfBelief/data/qd_f2p.cre~ ~override~
 	WRITE_EVALUATED_ASCII 0x248 ~qd_f2p~ 
