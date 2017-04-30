@@ -5,6 +5,7 @@ VERSION ~0.0~
 /* Language Settings */
 AUTO_TRA ~PowerOfBelief/tra/%s~
 LANGUAGE ~English~ ~english~ ~PowerOfBelief/tra/english/setup.tra~
+LANGUAGE ~Russian (by Salazar [Saigon1983])~ ~russian~ ~PowerOfBelief/tra/russian/setup.tra~
 
 // ========================================================
 // MAIN COMPONENT
