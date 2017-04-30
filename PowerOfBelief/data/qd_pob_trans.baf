@@ -1,0 +1,69 @@
+IF
+	Class(Protagonist,CLERIC)
+	HarmlessEntered([PC])
+	Global("1204_Trans_Appear","AR1204",0)  // Fortress Roof
+	ClassLevelLT(Protagonist,CLERIC,19)
+THEN
+	RESPONSE #100
+		SetGlobal("DebugOutput","LOCALS",1)
+		SetGlobal("1204_Trans_Appear","AR1204",1)  // Fortress Roof
+		CreateCreatureEffect("Trans","",[596.340],S)  // The Transcendent One
+		StartMovie("t1enter")
+END
+
+IF
+	Class(Protagonist,CLERIC)
+	HarmlessEntered([PC])
+	Global("1204_Trans_Appear","AR1204",0)  // Fortress Roof
+	ClassLevelGT(Protagonist,CLERIC,18)
+	ClassLevelLT(Protagonist,CLERIC,34)
+THEN
+	RESPONSE #100
+		SetGlobal("DebugOutput","LOCALS",1)
+		SetGlobal("1204_Trans_Appear","AR1204",1)  // Fortress Roof
+		CreateCreatureEffect("Trans2","",[596.340],S)  // The Transcendent One
+		StartMovie("t1enter")
+END
+
+IF
+	Class(Protagonist,CLERIC)
+	HarmlessEntered([PC])
+	Global("1204_Trans_Appear","AR1204",0)  // Fortress Roof
+	ClassLevelGT(Protagonist,CLERIC,33)
+	ClassLevelLT(Protagonist,CLERIC,67)
+THEN
+	RESPONSE #100
+		SetGlobal("DebugOutput","LOCALS",1)
+		SetGlobal("1204_Trans_Appear","AR1204",1)  // Fortress Roof
+		CreateCreatureEffect("Trans3","",[596.340],S)  // The Transcendent One
+		StartMovie("t1enter")
+END
+
+IF
+	Class(Protagonist,CLERIC)
+	HarmlessEntered([PC])
+	Global("1204_Trans_Appear","AR1204",0)  // Fortress Roof
+	ClassLevelGT(Protagonist,CLERIC,66)
+	ClassLevelLT(Protagonist,CLERIC,90)
+THEN
+	RESPONSE #100
+		SetGlobal("DebugOutput","LOCALS",1)
+		SetGlobal("1204_Trans_Appear","AR1204",1)  // Fortress Roof
+		CreateCreatureEffect("Trans4","",[596.340],S)  // The Transcendent One
+		StartMovie("t1enter")
+END
+
+IF
+	Class(Protagonist,CLERIC)
+	HarmlessEntered([PC])
+	Global("1204_Trans_Appear","AR1204",0)  // Fortress Roof
+	ClassLevelGT(Protagonist,CLERIC,89)
+THEN
+	RESPONSE #100
+		SetGlobal("DebugOutput","LOCALS",1)
+		SetGlobal("1204_Trans_Appear","AR1204",1)  // Fortress Roof
+		CreateCreatureEffect("Trans5","",[596.340],S)  // The Transcendent One
+		StartMovie("t1enter")
+END
+
+
