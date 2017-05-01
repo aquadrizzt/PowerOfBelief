@@ -7,9 +7,9 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("QD_PRIEST_SPEC_7","GLOBAL",1)
-			DisplayStringNoNameHead(Protagonist,34865)
+			// DisplayStringNoNameHead(Protagonist,34865)
 			//priest first spec bonus
-			ChangeStat(Protagonist,WIS,1,ADD)
+			PermanentStatChange(Protagonist,WIS,RAISE,1)
 			Continue()
 	END
 	
@@ -24,8 +24,8 @@
 		RESPONSE #100
 			SetGlobal("QD_PRIEST_SPEC_7","GLOBAL",1)
 			SetGlobal("QD_PRIEST_DUAL_SPEC","GLOBAL",1)
-			DisplayStringNoNameHead(Protagonist,34865)
-			ChangeStat(Protagonist,WIS,1,ADD)
+			//DisplayStringNoNameHead(Protagonist,34865)
+			PermanentStatChange(Protagonist,WIS,RAISE,1)
 			Continue()
 	END
 	
@@ -40,12 +40,12 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("QD_PRIEST_SPEC_12","GLOBAL",1)
-			DisplayStringNoNameHead(Protagonist,34865)
-			ChangeStat(Protagonist,WIS,2,ADD)
-			ChangeStat(Protagonist,CHR,1,ADD)
-			ChangeStat(Protagonist,RESISTMAGIC,10,ADD)
+			// DisplayStringNoNameHead(Protagonist,34865)
+			PermanentStatChange(Protagonist,WIS,RAISE,2)
+			PermanentStatChange(Protagonist,CHR,RAISE,1)
+			PermanentStatChange(Protagonist,RESISTMAGIC,RAISE,10)
 			Wait(2)
-			DisplayStringNoNameHead(Protagonist,34889)
+			// DisplayStringNoNameHead(Protagonist,34889)
 			
 			Continue()
 	END
@@ -70,7 +70,7 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",0)
-			ChangeStat(Protagonist,STR,-1,ADD)
+			PermanentStatChange(Protagonist,STR,LOWER,1)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
@@ -82,7 +82,7 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",0)
-			ChangeStat(Protagonist,DEX,-1,ADD)
+			PermanentStatChange(Protagonist,DEX,LOWER,1)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
@@ -94,7 +94,7 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",0)
-			ChangeStat(Protagonist,INT,-1,ADD)
+			PermanentStatChange(Protagonist,INT,LOWER,1)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
@@ -106,9 +106,9 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",1)
-			ChangeStat(Protagonist,STR,-1,ADD)
-			ChangeStat(Protagonist,CON,-1,ADD)
-			ChangeStat(Protagonist,MAXHITPOINTS,-3,ADD)
+			PermanentStatChange(Protagonist,STR,LOWER,1)
+			PermanentStatChange(Protagonist,CON,LOWER,1)
+			PermanentStatChange(Protagonist,MAXHITPOINTS,LOWER,3)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
@@ -120,8 +120,8 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",2)
-			ChangeStat(Protagonist,DEX,-2,ADD)
-			ChangeStat(Protagonist,LUCK,-1,ADD)
+			PermanentStatChange(Protagonist,DEX,LOWER,2)
+			PermanentStatChange(Protagonist,LUCK,LOWER,1)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
@@ -133,9 +133,9 @@
 	THEN
 		RESPONSE #100
 			SetGlobal("Specialist","GLOBAL",3)
-			ChangeStat(Protagonist,INT,-2,ADD)
-			ChangeStat(Protagonist,WIS,-1,ADD)
-			ChangeStat(Protagonist,LORE,-5,ADD)
+			PermanentStatChange(Protagonist,INT,LOWER,2)
+			PermanentStatChange(Protagonist,WIS,LOWER,1)
+			PermanentStatChange(Protagonist,LORE,LOWER,5)
 			DisplayStringNoNameHead(Protagonist,@16)
 			Continue()
 	END 
