@@ -1,5 +1,6 @@
 IF 
 	!Class(Protagonist,CLERIC)
+	!Class(Protagonist,FIGHTER)
 THEN
 	RESPONSE #100
 		SetNamelessClass(CLERIC)
