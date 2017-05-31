@@ -22,6 +22,22 @@ EXTEND_BOTTOM DMFTREE 28 #1
 END 
 
 //-----------------------------------
+// AOLA
+// - Can teach you to become a Priest by becoming a Discipline of Aoskar. 
+//-----------------------------------
+ALTER_TRANS DAOLA 
+	BEGIN 12 END 
+	BEGIN 0 END 
+BEGIN 
+	"ACTION" ~SetGlobal("Shutup","Global",1)
+			SetGlobal("Lady","Global",50)
+			SetGlobal("Disciple","Global",1)
+			SetGlobal("DMaze","Global",1)
+			SetGlobal("QD_Priest_Training","GLOBAL",1)
+			CreateCreature("qd_f2p",[0.0],S)~   
+END 
+
+//-----------------------------------
 // FALL-FROM-GRACE
 // - Can retrain you to become a Priest after learning from MFT. 
 //-----------------------------------
