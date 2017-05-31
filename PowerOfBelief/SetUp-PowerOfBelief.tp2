@@ -45,10 +45,22 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 	IF
 		Level(Protagonist,%lvl%)
 		!Class(Protagonist,CLERIC)
+		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
 			ChangeStat(Protagonist,XP,-%xp%,ADD)
+			Continue() 
+	END 
+	
+	IF
+		Level(Protagonist,%lvl%)
+		!Class(Protagonist,CLERIC)
+		XPLT(Protagonist,%xp%)
+	THEN	
+		RESPONSE #100 
+			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
+			ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
@@ -59,10 +71,24 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 		OR(2)
 		Level(Protagonist,%lvl%)
 		LevelGT(Protagonist,%lvl%)
+		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
 			ChangeStat(Protagonist,XP,-%xp%,ADD)
+			Continue() 
+	END
+	
+	IF
+		!Class(Protagonist,CLERIC)
+		OR(2)
+		Level(Protagonist,%lvl%)
+		LevelGT(Protagonist,%lvl%)
+		XPLT(Protagonist,%xp%)
+	THEN	
+		RESPONSE #100 
+			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
+			ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END
 >>>>>>>>
@@ -167,10 +193,22 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
 	IF
 		!Class(Protagonist,FIGHTER)
 		Level(Protagonist,%lvl%)
+		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
 			ChangeStat(Protagonist,XP,-%xp%,ADD)
+			Continue() 
+	END 
+	
+	IF
+		!Class(Protagonist,FIGHTER)
+		Level(Protagonist,%lvl%)
+		XPLT(Protagonist,%xp%)
+	THEN	
+		RESPONSE #100 
+			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
+			ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
@@ -181,10 +219,24 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
 		OR(2)
 		Level(Protagonist,%lvl%)
 		LevelGT(Protagonist,%lvl%)
+		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
 			ChangeStat(Protagonist,XP,-%xp%,ADD)
+			Continue() 
+	END
+	
+	IF
+		!Class(Protagonist,FIGHTER)
+		OR(2)
+		Level(Protagonist,%lvl%)
+		LevelGT(Protagonist,%lvl%)
+		XPLT(Protagonist,%xp%)
+	THEN	
+		RESPONSE #100 
+			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
+			ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END
 >>>>>>>>
