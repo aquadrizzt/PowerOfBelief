@@ -1,0 +1,37 @@
+@0 = ~Power of Belief~
+@1 = ~"Zastanawia³em siê w³aœnie, czy nie zechcia³byœ mnie nauczyæ czegoœ wiêcej o sile twoich *wierzeñ*."~
+@2 = ~Uœmiecha siê zagadkowo. "Jeœli rzeczywiœcie wierzysz, ¿e to mia³aby byæ twoja œcie¿ka, przyjacielu, to wska¿ê ci kierunek."~
+@3 = ~Œwiat zdaje siê byæ... bardziej zmienny ni¿ przedtem, chocia¿ nic nie jest zauwa¿alnie inne. "Dziêkujê ci, Op³akuj¹cy Drzewa, wierzê, ¿e nasze œcie¿ki jeszcze siê skrzy¿uj¹."~
+@4 = ~"Zastanawia³em siê, czy mo¿esz pokazaæ mi coœ wiêcej o sile *wierzeñ*."~
+@5 = ~"Chcesz, ¿ebym znowu ci przypomnia³a, jak dziêki sile *wierzeñ* kszta³towaæ rzeczywistoœæ? Proszê bardzo."~
+@6 = ~Jak i poprzednio, twoja zmiana postrzegania zdaje siê czyniæ œwiat znacznie mniej stabilnym. "Przyjemnoœæ jak zawsze, S³awo."~
+@7 = ~Zechcesz mi przypomnieæ o sile *wierzeñ*?"~
+@8 = ~U¿yj swej si³y woli, by wyci¹gn¹æ Mortego ze S³upa.~
+
+@9 = ~S³up Czaszek stawia ci zaciek³y opór, lecz twoja determinacja okazuje siê byæ dla niego nie do przezwyciê¿enia. Twoja *chêæ* wyzwala Mortego spoœród otaczaj¹cych go czaszek, zanim jeszcze go dosiêgniesz, i ostatecznie wyci¹gasz go z ³atwoœci¹. Jednak koncentracja, której ten czyn od ciebie wymaga³ pozostawia ciê kompletnie wyczerpanego... w jakiœ sposób wiesz, ¿e jesteœ teraz s³abszy ni¿ przedtem.~
+@10 = ~Tatua¿ wierzeñ~
+@11 = ~TATUA¯ WIERZEÑ
+Specjalne w³aœciwoœci:
+ +1 do Wiedzy
+ Zapamiêtanie 1 dodatkowego czaru z pierwszego poziomu kap³ana
+ Zapamiêtanie 1 dodatkowego czaru z drugiego poziomu kap³ana
+Waga: 0
+Mo¿e byæ u¿ywany jedynie przez Kap³anów
+Mo¿e byæ u¿ywany jedynie przez Bezimiennego
+
+Ten tatua¿ symbolizuje twoj¹ umiejêtnoœæ kszta³towania rzeczywistoœci za pomoc¹ samej wiary. Poprawia twoj¹ percepcjê i intuicjê, a tak¿e pozwala ci zapamiêtaæ wiêcej zaklêæ.~
+
+@12 = ~Tatua¿ Arcykap³ana~
+@13 = ~TATUA¯ ARCYKAP£ANA
+Specjalne w³aœciwoœci:
+ +3 do Wiedzy
+ Podwaja liczbê wszystkich czarów z 1 poziomu kap³ana
+ Podwaja liczbê wszystkich czarów z 2 poziomu kap³ana
+Waga: 0
+Mo¿e byæ u¿ywany jedynie przez Kap³anów
+Mo¿e byæ u¿ywany jedynie przez Bezimiennego
+
+Ten tatua¿ symbolizuje twoje dog³êbne zrozumienie si³y wierzeñ, i znacznie poprawia twoj¹ zdolnoœæ do kszta³towania rzeczywistoœci za ich pomoc¹. Uwydatnia tak¿e twoj¹ samoœwiadomoœæ i zwiêksza si³ê woli. Podwaja liczbê pomniejszych czarów mo¿liwych do zapamiêtania.~
+@14 = ~Global("QD_PRIEST_SPEC_7","GLOBAL",1)~
+@15 = ~Global("QD_PRIEST_SPEC_12","GLOBAL",1)~
+@16 = ~Premie ze specjalizacji zosta³y anulowane.~
