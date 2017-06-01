@@ -35,3 +35,12 @@
 @14 = ~Global("QD_PRIEST_SPEC_7","GLOBAL",1)~
 @15 = ~Global("QD_PRIEST_SPEC_12","GLOBAL",1)~
 @16 = ~Бонус специализации нейтрализован.~
+
+//new strings that need translation
+@17 = ~(continue)~
+@18 = ~...and standing silently in front of you is a creature wrapped in chains from head to toe, grinning maniacally under its mask. A chain dances from its outstretched hand, striking a path towards your heart - you *will* it to stop and it freezes, suspended in the air for a brief moment before a second thought sends it spiraling back towards the creature's head. The creature lets out half of a desperate yelp and then falls to the ground... and a cackling horde of its fellows pour a jangling web of chains over your body. You jerk yourself free of the memory.~
+
+@19 = ~"I know. I no longer wish to be a priest. Let's get some of that rust out of my repertoire of tricks."~
+@20 = ~"Yes, I wish to give up the power of my beliefs in exchange for sorcery, taking up the Art once more."~
+@21 = ~"Yes, I wish to give up the power of my beliefs in exchange for sorcery. Teach me the ways of the Art."~
+@22 = ~"Yes; I no longer wish to be a priest."~
