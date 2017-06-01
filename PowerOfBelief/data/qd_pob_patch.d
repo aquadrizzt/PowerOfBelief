@@ -110,6 +110,48 @@ EXTEND_BOTTOM DMORTE 529 #7
 END 
 
 //-----------------------------------
+// MANY-AS-ONE
+// - Adding Priest check to Kyton revelation after completion of MAO quest. 
+//-----------------------------------
+APPEND DMANYAS1 
+
+	IF ~~ THEN BEGIN qd_kyton_revelation
+		SAY @18
+		++ @17 DO ~GiveExperience(Protagonist,1000)~ + 19 
+	END 
+
+END
+
+EXTEND_BOTTOM DMANYAS1 17 #0 
+	+ ~Class(Protagonist,CLERIC)~ + @17 DO ~GiveExperience(Protagonist,1000)~ + qd_kyton_revelation
+END 
+
+//-----------------------------------
+// NABAT
+// - Adding Priest check to Thief training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DNABAT 21 #1
+	+ ~Class(Protagonist,CLERIC)~ + @19 DO ~FadeToColor([20.0],0) Wait(2) FadeFromColor([20.0],0) SetNamelessClass(THIEF)~ + 22
+END 
+
+//-----------------------------------
+// THORNCOMBE
+// - Adding Priest check to Mage training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DTHORNCO 32 #1
+	+ ~Class(Protagonist,CLERIC) GlobalGT("Mage_Training","GLOBAL",0)~ + @20 + 33
+	+ ~Class(Protagonist,CLERIC) Global("Mage_Training","GLOBAL",0)~ + @21 + 36
+END 
+
+//-----------------------------------
+// ELI
+// - Adding Priest check to Thief training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DELI 46 #1
+	+ ~Class(Protagonist,CLERIC)~ + @22 + 47
+END 
+
+//-----------------------------------
 // RATPR Patches
 // - Replace all Fighter training with the updated Fighter training creature. 
 //-----------------------------------
