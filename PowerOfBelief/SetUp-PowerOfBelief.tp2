@@ -102,7 +102,7 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 		RESPONSE #100 
 			SetNamelessClass(CLERIC)
 			ChangeStat(Protagonist,Level,0,SET)
-			ChangeStat(Protagonist,XP,0,SET)
+	//		ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
@@ -250,7 +250,7 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
 		RESPONSE #100 
 			SetNamelessClass(FIGHTER)
 			ChangeStat(Protagonist,Level,0,SET)
-			ChangeStat(Protagonist,XP,0,SET)
+		//	ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
