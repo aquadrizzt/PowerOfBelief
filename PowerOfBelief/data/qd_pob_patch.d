@@ -126,6 +126,10 @@ EXTEND_BOTTOM DMANYAS1 17 #0
 	+ ~Class(Protagonist,CLERIC)~ + @17 DO ~GiveExperience(Protagonist,1000)~ + qd_kyton_revelation
 END 
 
+EXTEND_BOTTOM DMANYAS1 64 #0 
+	+ ~Class(Protagonist,CLERIC)~ + @24 + 68
+END 
+
 //-----------------------------------
 // NABAT
 // - Adding Priest check to Thief training dialog.
@@ -149,6 +153,31 @@ END
 //-----------------------------------
 EXTEND_BOTTOM DELI 46 #1
 	+ ~Class(Protagonist,CLERIC)~ + @22 + 47
+END 
+
+//-----------------------------------
+// QUI-SAI
+// - Adding Priest check to Warrior training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DQUISAI 50 #2
+	+ ~Class(Protagonist,CLERIC)~ + @23 DO ~FadeToColor([20.0],0) Wait(3) FadeFromColor([20.0],0) CreateCreature("qd_p2f",[0.0],SSW)~ + 37
+END 
+
+//-----------------------------------
+// ANNAH
+// - Adding Priest check to Thief training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DANNAH 322 #3
+	+ ~Class(Protagonist,CLERIC) GlobalGT("Thief_Training","GLOBAL",0)~ + @25 + 325
+	+ ~Class(Protagonist,CLERIC) Global("Thief_Training","GLOBAL",0)~ + @26 + 36
+END 
+
+//-----------------------------------
+// PORPHIRON
+// - Adding Priest check to Warrior training dialog.
+//-----------------------------------
+EXTEND_BOTTOM DPORPHIR 32 #1
+	+ ~Class(Protagonist,CLERIC)~ + @27 + 33
 END 
 
 //-----------------------------------
