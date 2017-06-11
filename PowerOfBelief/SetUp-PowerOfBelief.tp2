@@ -45,64 +45,48 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 <<<<<<<< QD/tno_fighter_level.baf
 	IF
 		Level(Protagonist,%lvl%)
-		!Class(Protagonist,CLERIC)
-		!XPLT(Protagonist,%xp%)
+		Class(Protagonist,FIGHTER)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,-%xp%,ADD)
 			Continue() 
 	END 
 	
-	IF
-		Level(Protagonist,%lvl%)
-		!Class(Protagonist,CLERIC)
-		XPLT(Protagonist,%xp%)
-	THEN	
-		RESPONSE #100 
-			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,0,SET)
-			Continue() 
-	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_fighter_level_max.baf
 	IF
-		!Class(Protagonist,CLERIC)
+		Class(Protagonist,FIGHTER)
 		OR(2)
 		Level(Protagonist,%lvl%)
 		LevelGT(Protagonist,%lvl%)
-		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,-%xp%,ADD)
 			Continue() 
 	END
-	
+>>>>>>>>
+
+<<<<<<<< QD/qd_xp_f2p_fighter_check.baf
 	IF
-		!Class(Protagonist,CLERIC)
-		OR(2)
-		Level(Protagonist,%lvl%)
-		LevelGT(Protagonist,%lvl%)
-		XPLT(Protagonist,%xp%)
+		!CheckStatLT(Protagonist,%xp%,XP)
+		Class(Protagonist,FIGHTER)
 	THEN	
 		RESPONSE #100 
-			SetGlobal("qd_tno_fighter_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,0,SET)
-			Continue() 
-	END
+			BitSet("qd_tno_fighter_xp","GLOBAL",%bitname%)
+			ChangeStat(Protagonist,XP,-%xp%,ADD)
+	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_priest_level_zero.baf
 	IF
 		Global("qd_tno_priest_lvl","GLOBAL",0)
-		!Class(Protagonist,CLERIC)
+		Class(Protagonist,FIGHTER)
 	THEN	
 		RESPONSE #100 
 			SetNamelessClass(CLERIC)
 			ChangeStat(Protagonist,Level,0,SET)
-	//		ChangeStat(Protagonist,XP,0,SET)
+			//ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
@@ -110,19 +94,18 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 <<<<<<<< QD/tno_priest_level.baf
 	IF
 		Global("qd_tno_priest_lvl","GLOBAL",%lvl%)
-		!Class(Protagonist,CLERIC)
+		Class(Protagonist,FIGHTER)
 	THEN	
 		RESPONSE #100 
 			SetNamelessClass(CLERIC)
 			ChangeStat(Protagonist,Level,%lvl%,SET)
-			ChangeStat(Protagonist,XP,%xp%,ADD)
 			Continue() 
 	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_priest_level_max.baf
 	IF
-		!Class(Protagonist,CLERIC)
+		Class(Protagonist,FIGHTER)
 		OR(2)
 		Global("qd_tno_priest_lvl","GLOBAL",%lvl%)
 		GlobalGT("qd_tno_priest_lvl","GLOBAL",%lvl%)
@@ -130,16 +113,28 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 		RESPONSE #100 
 			SetNamelessClass(CLERIC)
 			ChangeStat(Protagonist,Level,%lvl%,SET)
-			ChangeStat(Protagonist,XP,%xp%,ADD)
 			Continue() 
 	END
 >>>>>>>>
 
-<<<<<<<< QD/tno_priest_conversion_end.baf
+<<<<<<<< QD/qd_xp_f2p_priest_check.baf
+	IF
+		Class(Protagonist,FIGHTER) //it loads stats at the beginning, this is to prevent doubling of xp
+		BitCheck("qd_tno_priest_xp","GLOBAL",%bitname%)
+	THEN	
+		RESPONSE #100 
+			BitClear("qd_tno_priest_xp","GLOBAL",%bitname%)
+			ChangeStat(Protagonist,XP,%xp%,ADD)
+			Continue()
+	END 
+>>>>>>>>
+
+<<<<<<<< QD/tno_f2p_conversion_end.baf
 	IF
 		True()
 	THEN
 		RESPONSE #100
+			SetGlobal("qd_tno_priest_active","GLOBAL",1)
 			DestroySelf()
 	END
 >>>>>>>>
@@ -149,103 +144,99 @@ COPY_EXISTING ~XPLEVEL.2DA~ ~override~
 	COUNT_2DA_COLS num_cols
 	COUNT_2DA_ROWS num_cols num_rows
 	READ_2DA_ENTRIES_NOW ~r2en_xp_level~ num_cols
+	
+	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+		INNER_ACTION BEGIN 
+			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+			EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_fighter_check.baf~
+				xp = 2**(%exp%-1)
+				EVAL
+		END
+	END 
+	
 	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_xp_level~ 1 col xp
 		INNER_ACTION BEGIN 
 			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
 				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level_max.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL 
 			END 
 			ELSE BEGIN 
 				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL  
 			END 
 		END 
 	END 
+		
 	INNER_ACTION BEGIN 
 		EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_zero.baf~
-	END 
+	END
 	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_xp_level~ 4 col xp
 		INNER_ACTION BEGIN 
 			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
 				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_max.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL 
 			END 
 			ELSE BEGIN 
 				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL  
 			END 
 		END 
 	END
+	FOR (exp = 31; exp > 0 ; exp -= 1) BEGIN 
+		INNER_ACTION BEGIN 
+			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+			EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_priest_check.baf~
+				xp = 2**(%exp%-1)
+				EVAL
+		END
+	END 
 	
-EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
+EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_f2p_conversion_end.baf~
 
 //BUILDING THE PRIEST TO FIGHTER CONVERSION
 <<<<<<<< QD/tno_priest_level_p2f.baf
 	IF
-		!Class(Protagonist,FIGHTER)
+		Class(Protagonist,CLERIC)
 		Level(Protagonist,%lvl%)
-		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,-%xp%,ADD)
-			Continue() 
-	END 
-	
-	IF
-		!Class(Protagonist,FIGHTER)
-		Level(Protagonist,%lvl%)
-		XPLT(Protagonist,%xp%)
-	THEN	
-		RESPONSE #100 
-			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,0,SET)
 			Continue() 
 	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_priest_level_max_p2f.baf
 	IF
-		!Class(Protagonist,FIGHTER)
+		Class(Protagonist,CLERIC)
 		OR(2)
 		Level(Protagonist,%lvl%)
 		LevelGT(Protagonist,%lvl%)
-		!XPLT(Protagonist,%xp%)
 	THEN	
 		RESPONSE #100 
 			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,-%xp%,ADD)
 			Continue() 
 	END
-	
+>>>>>>>>
+
+<<<<<<<< QD/qd_xp_p2f_priest_check.baf
 	IF
-		!Class(Protagonist,FIGHTER)
-		OR(2)
-		Level(Protagonist,%lvl%)
-		LevelGT(Protagonist,%lvl%)
-		XPLT(Protagonist,%xp%)
+		!CheckStatLT(Protagonist,%xp%,XP)
+		Class(Protagonist,CLERIC)
 	THEN	
 		RESPONSE #100 
-			SetGlobal("qd_tno_priest_lvl","GLOBAL",%lvl%)
-			ChangeStat(Protagonist,XP,0,SET)
-			Continue() 
-	END
+			BitSet("qd_tno_priest_xp","GLOBAL",%bitname%)
+			ChangeStat(Protagonist,XP,-%xp%,ADD)
+	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_fighter_level_zero_p2f.baf
 	IF
 		Global("qd_tno_fighter_lvl","GLOBAL",0)
-		!Class(Protagonist,FIGHTER)
+		Class(Protagonist,CLERIC)
 	THEN	
 		RESPONSE #100 
 			SetNamelessClass(FIGHTER)
@@ -258,19 +249,18 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
 <<<<<<<< QD/tno_fighter_level_p2f.baf
 	IF
 		Global("qd_tno_fighter_lvl","GLOBAL",%lvl%)
-		!Class(Protagonist,FIGHTER)
+		Class(Protagonist,CLERIC)
 	THEN	
 		RESPONSE #100 
 			SetNamelessClass(FIGHTER)
 			ChangeStat(Protagonist,Level,%lvl%,SET)
-			ChangeStat(Protagonist,XP,%xp%,ADD)
 			Continue() 
 	END 
 >>>>>>>>
 
 <<<<<<<< QD/tno_fighter_level_max_p2f.baf
 	IF
-		!Class(Protagonist,FIGHTER)
+		Class(Protagonist,CLERIC)
 		OR(2)
 		Global("qd_tno_fighter_lvl","GLOBAL",%lvl%)
 		GlobalGT("qd_tno_fighter_lvl","GLOBAL",%lvl%)
@@ -278,16 +268,28 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_conversion_end.baf~
 		RESPONSE #100 
 			SetNamelessClass(FIGHTER)
 			ChangeStat(Protagonist,Level,%lvl%,SET)
-			ChangeStat(Protagonist,XP,%xp%,ADD)
 			Continue() 
 	END
 >>>>>>>>
 
-<<<<<<<< QD/tno_priest_conversion_end.baf
+<<<<<<<< QD/qd_xp_p2f_fighter_check.baf
+	IF
+		Class(Protagonist,CLERIC)
+		BitCheck("qd_tno_fighter_xp","GLOBAL",%bitname%)
+	THEN	
+		RESPONSE #100 
+			BitClear("qd_tno_fighter_xp","GLOBAL",%bitname%)
+			ChangeStat(Protagonist,XP,%xp%,ADD)
+			Continue()
+	END 
+>>>>>>>>
+
+<<<<<<<< QD/tno_p2f_conversion_end.baf
 	IF
 		True()
 	THEN
 		RESPONSE #100
+			SetGlobal("qd_tno_priest_active","GLOBAL",0)
 			DestroySelf()
 	END
 >>>>>>>>
@@ -297,45 +299,58 @@ COPY_EXISTING ~XPLEVEL.2DA~ ~override~
 	COUNT_2DA_COLS num_cols
 	COUNT_2DA_ROWS num_cols num_rows
 	READ_2DA_ENTRIES_NOW ~r2en_xp_level~ num_cols
+	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+		INNER_ACTION BEGIN 
+			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+			EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_priest_check.baf~
+				xp = 2**(%exp%-1)
+				EVAL 
+		END
+	END 
+	
 	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_xp_level~ 4 col xp
 		INNER_ACTION BEGIN 
 			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
 				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_max_p2f.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL 
 			END 
 			ELSE BEGIN 
 				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_p2f.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL  
 			END 
 		END 
 	END
+	
 	INNER_ACTION BEGIN 
 		EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_zero_p2f.baf~
 	END 
 	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_xp_level~ 1 col xp
 		INNER_ACTION BEGIN 
 			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
 				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_max_p2f.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL 
 			END 
 			ELSE BEGIN 
 				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_p2f.baf~ 
 					lvl = (%col%)
-					xp = (%xp%)
 					EVAL  
 			END 
 		END 
 	END 
+	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+		INNER_ACTION BEGIN 
+			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+			EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_fighter_check.baf~
+				xp = 2**(%exp%-1)
+				EVAL
+		END
+	END
 	
-EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_conversion_end.baf~
+	
+EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_p2f_conversion_end.baf~
 
 //Priest specialization tattoos
 COPY ~PowerOfBelief/data/QDTTPR1.itm~ ~override~ 
@@ -384,3 +399,4 @@ END
 
 //add ClassXLevel Checks for Transcendent One 
 EXTEND_BOTTOM ~1204trig.bcs~ ~PowerOfBelief/data/qd_pob_trans.baf~ 
+
