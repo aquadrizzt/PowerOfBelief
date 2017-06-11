@@ -1,10 +1,20 @@
 IF 
 	!Class(Protagonist,FIGHTER)
 	!Class(Protagonist,CLERIC)
+	Global("qd_tno_priest_active","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetNamelessClass(CLERIC)
+		DestroySelf()
+		// ChangeStat(Protagonist,XP,0,SET)
+END 
+
+IF 
+	!Class(Protagonist,FIGHTER)
+	!Class(Protagonist,CLERIC)
+	Global("qd_tno_priest_active","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetNamelessClass(FIGHTER)
 		// ChangeStat(Protagonist,XP,0,SET)
-		Continue() 
 END 
-
