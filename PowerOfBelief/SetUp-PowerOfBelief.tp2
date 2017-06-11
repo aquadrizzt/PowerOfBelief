@@ -139,62 +139,49 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 	END
 >>>>>>>>
 		
-//Spells known progression reading
-COPY_EXISTING ~XPLEVEL.2DA~ ~override~
-	COUNT_2DA_COLS num_cols
-	COUNT_2DA_ROWS num_cols num_rows
-	READ_2DA_ENTRIES_NOW ~r2en_xp_level~ num_cols
-	
-	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
-		INNER_ACTION BEGIN 
-			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
-			EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_fighter_check.baf~
-				xp = 2**(%exp%-1)
-				EVAL
-		END
-	END 
-	
-	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		INNER_ACTION BEGIN 
-			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
-				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level_max.baf~ 
-					lvl = (%col%)
-					EVAL 
-			END 
-			ELSE BEGIN 
-				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level.baf~ 
-					lvl = (%col%)
-					EVAL  
-			END 
-		END 
-	END 
-		
-	INNER_ACTION BEGIN 
-		EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_zero.baf~
-	END
-	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		INNER_ACTION BEGIN 
-			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
-				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_max.baf~ 
-					lvl = (%col%)
-					EVAL 
-			END 
-			ELSE BEGIN 
-				EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level.baf~ 
-					lvl = (%col%)
-					EVAL  
-			END 
-		END 
-	END
-	FOR (exp = 31; exp > 0 ; exp -= 1) BEGIN 
-		INNER_ACTION BEGIN 
-			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
-			EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_priest_check.baf~
-				xp = 2**(%exp%-1)
-				EVAL
-		END
-	END 
-	
+//binary search for xp
+OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+	OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+	EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_fighter_check.baf~
+		xp = 2**(%exp%-1)
+		EVAL
+END 
+
+//saving level 
+OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
+	EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level.baf~ 
+		lvl = (%ind%)
+		EVAL  
+END 	
+
+EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_fighter_level_max.baf~ 
+	lvl = 50
+	EVAL 
+ 
+
+//priest conversion
+EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_zero.baf~
+
+OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
+	EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level.baf~ 
+		lvl = (%ind%)
+		EVAL  
+END 	
+
+EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_priest_level_max.baf~ 
+	lvl = 50
+	EVAL 
+ 
+
+//priest xp 
+OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+	OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+	EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/qd_xp_f2p_priest_check.baf~
+		xp = 2**(%exp%-1)
+		EVAL
+END 
+
+//end	
 EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_f2p_conversion_end.baf~
 
 //BUILDING THE PRIEST TO FIGHTER CONVERSION
@@ -294,62 +281,49 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_f2p_conversion_end.baf~
 	END
 >>>>>>>>
 		
-//Spells known progression reading
-COPY_EXISTING ~XPLEVEL.2DA~ ~override~
-	COUNT_2DA_COLS num_cols
-	COUNT_2DA_ROWS num_cols num_rows
-	READ_2DA_ENTRIES_NOW ~r2en_xp_level~ num_cols
-	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
-		INNER_ACTION BEGIN 
-			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
-			EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_priest_check.baf~
-				xp = 2**(%exp%-1)
-				EVAL 
-		END
-	END 
-	
-	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		INNER_ACTION BEGIN 
-			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
-				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_max_p2f.baf~ 
-					lvl = (%col%)
-					EVAL 
-			END 
-			ELSE BEGIN 
-				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_p2f.baf~ 
-					lvl = (%col%)
-					EVAL  
-			END 
-		END 
-	END
-	
-	INNER_ACTION BEGIN 
-		EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_zero_p2f.baf~
-	END 
-	FOR (col = 1; col < num_cols; col += 1) BEGIN
-		INNER_ACTION BEGIN 
-			ACTION_IF (col = %num_cols%-1) THEN BEGIN 
-				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_max_p2f.baf~ 
-					lvl = (%col%)
-					EVAL 
-			END 
-			ELSE BEGIN 
-				EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_p2f.baf~ 
-					lvl = (%col%)
-					EVAL  
-			END 
-		END 
-	END 
-	FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
-		INNER_ACTION BEGIN 
-			OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
-			EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_fighter_check.baf~
-				xp = 2**(%exp%-1)
-				EVAL
-		END
-	END
-	
-	
+//binary search for xp
+OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+	OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+	EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_priest_check.baf~
+		xp = 2**(%exp%-1)
+		EVAL
+END 
+
+//saving level 
+OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
+	EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_p2f.baf~ 
+		lvl = (%ind%)
+		EVAL  
+END 	
+
+EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_priest_level_max_p2f.baf~ 
+	lvl = 50
+	EVAL 
+ 
+
+//priest conversion
+EXTEND_BOTTOM  ~qd_p2f.bcs~ ~QD/tno_fighter_level_zero_p2f.baf~
+
+OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
+	EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_p2f.baf~ 
+		lvl = (%ind%)
+		EVAL  
+END 	
+
+EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_fighter_level_max_p2f.baf~ 
+	lvl = 50
+	EVAL 
+ 
+
+//priest xp 
+OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
+	OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
+	EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/qd_xp_p2f_fighter_check.baf~
+		xp = 2**(%exp%-1)
+		EVAL
+END 
+
+//end	
 EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_p2f_conversion_end.baf~
 
 //Priest specialization tattoos
