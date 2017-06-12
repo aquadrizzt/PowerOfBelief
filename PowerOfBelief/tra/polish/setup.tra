@@ -36,16 +36,14 @@ Ten tatua¿ symbolizuje twoje dog³êbne zrozumienie si³y wierzeñ, i znacznie 
 @15 = ~Global("QD_PRIEST_SPEC_12","GLOBAL",1)~
 @16 = ~Premie ze specjalizacji zosta³y anulowane.~
 
-//new strings that need translation
-@17 = ~(continue)~
-@18 = ~...and standing silently in front of you is a creature wrapped in chains from head to toe, grinning maniacally under its mask. A chain dances from its outstretched hand, striking a path towards your heart - you *will* it to stop and it freezes, suspended in the air for a brief moment before a second thought sends it spiraling back towards the creature's head. The creature lets out half of a desperate yelp and then falls to the ground... and a cackling horde of its fellows pour a jangling web of chains over your body. You jerk yourself free of the memory.~
-
-@19 = ~"I know. I no longer wish to be a priest. Let's get some of that rust out of my repertoire of tricks."~
-@20 = ~"Yes, I wish to give up the power of my beliefs in exchange for sorcery, taking up the Art once more."~
-@21 = ~"Yes, I wish to give up the power of my beliefs in exchange for sorcery. Teach me the ways of the Art."~
-@22 = ~"Yes; I no longer wish to be a priest."~
-@23 = ~"Yes. I no longer wish to be a priest. Make me a warrior."~
-@24 = ~"I am hard to kill and can shape reality with my will."~
-@25 = ~"I'd like to shelve my beliefs for a while and return to the thieving profession. Can you teach me?"~
-@26 = ~"I'd like to shelve my beliefs for a while and try my hand at stealthier pursuits."~
-@27 = ~"I no longer wish to be a priest... I wish to be of the warrior profession."~
+@17 = ~(kontynuuj)~
+@18 = ~...a stoj¹ca przed tob¹ w ciszy istota jest opleciona ³añcuchami od stóp do g³ów i wariacko uœmiecha siê spod maski. £añcuchy tañcz¹ w jej wyci¹gniêtej rêce i wystrzeliwuj¹ w stronê twojego serca. *Chcesz* by siê zatrzyma³y i one zastygaj¹. Przez krótk¹ chwilê wisz¹ w powietrzu, a potem twoja kolejna myœl odsy³a je wiruj¹ce z powrotem w kierunku g³owy stwora. Istota zwala siê na ziemiê w po³owie swojego rozpaczliwego skowytu... a rechocz¹ca horda jej pobratymców zarzuca na ciebie sieæ swoich metalicznie brzêcz¹cych ³añcuchów. Otrz¹sasz siê ze wspomnienia.~
+@19 = ~"Nie chcê ju¿ d³u¿ej byæ kap³anem. Pozb¹dŸmy siê tego próchna z repertuaru moich sztuczek."~
+@20 = ~"Tak, chcê zrezygnowaæ z si³y moich wierzeñ na rzecz magii; powracam do Sztuki."~
+@21 = ~"Tak, chcê zrezygnowaæ z si³y moich wierzeñ na rzecz magii. Poka¿ mi œcie¿kê Sztuki.~
+@22 = ~"Tak. Nie chcê ju¿ d³u¿ej byæ kap³anem."~
+@23 = ~"Tak, nie chcê ju¿ d³u¿ej byæ kap³anem. Uczyñ ze mnie wojownika."~
+@24 = ~"Trudno mnie zabiæ i potrafiê kszta³towaæ rzeczywistoœæ si³¹ swojej woli."~
+@25 = ~"Chcia³bym na chwilê odstawiæ moje wierzenia na pó³kê i powróciæ do z³odziejskiej profesji. Wyszkolisz mnie?"~
+@26 = ~"Chcia³bym na chwilê odstawiæ moje wierzenia na pó³kê i sprawdziæ siê w bardziej skrytych zajêciach."~
+@27 = ~"Nie chcê ju¿ d³u¿ej byæ kap³anem... Chcê przyj¹æ profesjê wojownika."~
