@@ -18,3 +18,13 @@ THEN
 		DestroySelf()
 		// ChangeStat(Protagonist,XP,0,SET)
 END 
+
+IF
+	!CheckStat(Protagonist,0,XP)
+	Class(Protagonist,CLERIC)
+	Global("qd_priest_xp_cutscene","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("qd_priest_xp_cutscene","GLOBAL",1)
+		SetCutsceneLite(TRUE)
+END  
