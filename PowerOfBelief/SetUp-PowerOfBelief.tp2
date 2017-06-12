@@ -39,7 +39,8 @@ COPY ~PowerOfBelief/data/qd_p2f.cre~ ~override~
 	WRITE_EVALUATED_ASCII 0x248 ~qd_p2f~ 
 	WRITE_EVALUATED_ASCII 0x2cc ~qd_p2f~
 	
-COMPILE ~PowerOfBelief/data/qd_p2f.baf~ 
+COMPILE ~PowerOfBelief/data/qd_p2f.baf~
+ 
 
 //BUILDING THE FIGHTER TO PRIEST CONVERSION
 <<<<<<<< QD/tno_fighter_level.baf
@@ -138,6 +139,20 @@ COMPILE ~PowerOfBelief/data/qd_p2f.baf~
 			DestroySelf()
 	END
 >>>>>>>>
+
+<<<<<<<< QD/tno_f2p_cutscene_end.baf
+IF
+	CheckStat(Protagonist,0,XP)
+	Class(Protagonist,FIGHTER)
+THEN
+	RESPONSE #100
+		SetGlobal("qd_priest_xp_cutscene","GLOBAL",0)
+		SetCutsceneLite(FALSE)
+		Continue()
+END
+>>>>>>>>
+
+
 		
 //binary search for xp
 OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
@@ -146,6 +161,9 @@ OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN
 		xp = 2**(%exp%-1)
 		EVAL
 END 
+
+//cutscene end
+EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_f2p_cutscene_end.baf~
 
 //saving level 
 OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
@@ -280,7 +298,19 @@ EXTEND_BOTTOM ~qd_f2p.bcs~ ~QD/tno_f2p_conversion_end.baf~
 			DestroySelf()
 	END
 >>>>>>>>
-		
+	
+<<<<<<<< QD/tno_p2f_cutscene_end.baf
+IF
+	CheckStat(Protagonist,0,XP)
+	Class(Protagonist,CLERIC)
+THEN
+	RESPONSE #100
+		SetGlobal("qd_priest_xp_cutscene","GLOBAL",0)
+		SetCutsceneLite(FALSE)
+		Continue()
+END
+>>>>>>>>
+	
 //binary search for xp
 OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN 
 	OUTER_TEXT_SPRINT bitname ~BIT%exp%~ 
@@ -288,6 +318,9 @@ OUTER_FOR (exp = 31; exp > 0; exp -= 1) BEGIN
 		xp = 2**(%exp%-1)
 		EVAL
 END 
+
+//cutscene end
+EXTEND_BOTTOM ~qd_p2f.bcs~ ~QD/tno_p2f_cutscene_end.baf~
 
 //saving level 
 OUTER_FOR (ind = 1; ind < 50; ind +=1) BEGIN 
