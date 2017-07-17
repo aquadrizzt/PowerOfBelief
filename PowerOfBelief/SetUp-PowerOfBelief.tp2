@@ -1,6 +1,6 @@
 BACKUP ~PowerOfBelief/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.0~ 
+VERSION ~0.1~ 
 
 /* Language Settings */
 AUTO_TRA ~PowerOfBelief/tra/%s~
